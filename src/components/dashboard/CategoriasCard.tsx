@@ -1,8 +1,7 @@
-import { Tags, Plus, Edit2, Trash2, BarChart3 } from "lucide-react";
+import { Tags, Plus, Edit2, Trash2 } from "lucide-react";
 import { DashboardCard } from "@/components/DashboardCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { useState } from "react";
 
 export const CategoriasCard = () => {
@@ -71,33 +70,41 @@ export const CategoriasCard = () => {
   ];
 
   const handleEditCategory = (index: number) => {
-    console.log("Editando categoria:", categories[index].name);
+    // Lógica para editar categoria
+    console.log("Editar categoria:", index);
   };
 
   const handleDeleteCategory = (index: number) => {
-    console.log("Excluindo categoria:", categories[index].name);
+    // Lógica para deletar categoria
+    console.log("Deletar categoria:", index);
   };
 
-  const handleAddCategory = () => {
-    setShowAddForm(true);
-    console.log("Abrindo formulário para nova categoria");
-  };
+  const totalGasto = categories.reduce((sum, cat) => sum + cat.gastoAtual, 0);
+  const totalItens = categories.reduce((sum, cat) => sum + cat.count, 0);
 
   return (
-    <DashboardCard title="Categorias & Orçamentos" icon={Tags}>
+    <DashboardCard
+      title="Categorias & Orçamentos"
+      icon={Tags}
+      className="col-span-1 lg:col-span-2"
+    >
       <div className="space-y-4">
         {/* Header com botão de adicionar */}
         <div className="flex items-center justify-between">
           <div className="text-sm text-muted-foreground">
             {categories.length} categorias ativas
           </div>
-          <Button size="sm" className="h-7 px-2" onClick={handleAddCategory}>
-            <Plus className="h-3 w-3 mr-1" />
+          <Button 
+            size="sm" 
+            onClick={() => setShowAddForm(!showAddForm)}
+            className="flex items-center space-x-2"
+          >
+            <Plus className="w-4 h-4" />
             Nova
           </Button>
         </div>
 
-        {/* Lista de categorias */}
+        {/* Lista de categorias simplificada */}
         <div className="space-y-3">
           {categories.map((category, index) => {
             const percentualGasto = (category.gastoAtual / category.limite) * 100;
@@ -121,69 +128,47 @@ export const CategoriasCard = () => {
                   
                   <div className="flex items-center space-x-2">
                     <div className="text-right">
-                      <div className="text-sm font-bold">
+                      <div className="text-sm font-medium">
                         R$ {category.gastoAtual.toFixed(2)}
                       </div>
                       <div className="text-xs text-muted-foreground">
                         de R$ {category.limite.toFixed(2)}
                       </div>
                     </div>
-                    <Badge 
-                      variant="secondary" 
-                      className={`text-xs ${
-                        percentualGasto > 90 ? 'bg-destructive text-destructive-foreground' :
-                        percentualGasto > 70 ? 'bg-yellow-500 text-white' :
-                        'bg-success text-success-foreground'
-                      }`}
-                    >
-                      {percentualGasto.toFixed(0)}%
-                    </Badge>
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity flex space-x-1">
-                      <Button 
-                        size="sm" 
-                        variant="ghost" 
-                        className="h-6 w-6 p-0"
+                    
+                    <div className="flex space-x-1">
+                      <Button
+                        size="sm"
+                        variant="ghost"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleEditCategory(index);
                         }}
+                        className="h-6 w-6 p-0"
                       >
-                        <Edit2 className="h-3 w-3" />
+                        <Edit2 className="w-3 h-3" />
                       </Button>
-                      <Button 
-                        size="sm" 
-                        variant="ghost" 
-                        className="h-6 w-6 p-0 text-destructive"
+                      <Button
+                        size="sm"
+                        variant="ghost"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleDeleteCategory(index);
                         }}
+                        className="h-6 w-6 p-0 text-destructive"
                       >
-                        <Trash2 className="h-3 w-3" />
+                        <Trash2 className="w-3 h-3" />
                       </Button>
                     </div>
-                  </div>
-                </div>
-
-                {/* Barra de progresso */}
-                <div className="mt-2 space-y-1">
-                  <Progress value={percentualGasto} className="h-2" />
-                  <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>Gasto: R$ {category.gastoAtual.toFixed(2)}</span>
-                    <span>Restante: R$ {(category.limite - category.gastoAtual).toFixed(2)}</span>
                   </div>
                 </div>
 
                 {/* Detalhes expandidos */}
                 {isExpanded && (
-                  <div className="mt-3 pt-3 border-t border-border">
-                    <div className="flex items-center mb-2">
-                      <BarChart3 className="h-3 w-3 mr-1" />
-                      <span className="text-xs font-medium">Principais Gastos</span>
-                    </div>
-                    <div className="space-y-1">
+                  <div className="mt-3 pt-3 border-t">
+                    <div className="space-y-2">
                       {category.gastos.map((gasto, gastoIndex) => (
-                        <div key={gastoIndex} className="flex justify-between text-xs">
+                        <div key={gastoIndex} className="flex justify-between text-sm">
                           <span className="text-muted-foreground">{gasto.item}</span>
                           <span className="font-medium">R$ {gasto.valor.toFixed(2)}</span>
                         </div>
@@ -196,23 +181,19 @@ export const CategoriasCard = () => {
           })}
         </div>
 
-        {/* Estatísticas */}
-        <div className="bg-gradient-card rounded-lg p-3">
-          <div className="grid grid-cols-3 gap-2 text-center">
+        {/* Resumo simplificado */}
+        <div className="pt-4 border-t">
+          <div className="grid grid-cols-3 gap-4 text-center">
             <div>
-              <div className="text-lg font-bold text-primary">
-                R$ {categories.reduce((sum, cat) => sum + cat.gastoAtual, 0).toFixed(0)}
-              </div>
+              <div className="text-lg font-bold">R$ {totalGasto.toFixed(0)}</div>
               <div className="text-xs text-muted-foreground">Total Gasto</div>
             </div>
             <div>
-              <div className="text-lg font-bold text-success">{categories.length}</div>
+              <div className="text-lg font-bold">{categories.length}</div>
               <div className="text-xs text-muted-foreground">Categorias</div>
             </div>
             <div>
-              <div className="text-lg font-bold text-muted-foreground">
-                {categories.reduce((sum, cat) => sum + cat.count, 0)}
-              </div>
+              <div className="text-lg font-bold">{totalItens}</div>
               <div className="text-xs text-muted-foreground">Itens Total</div>
             </div>
           </div>

@@ -1,6 +1,5 @@
 import { CreditCard, TrendingUp, Calendar, DollarSign } from "lucide-react";
 import { DashboardCard } from "@/components/DashboardCard";
-import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
@@ -38,16 +37,21 @@ export const ConectividadeCard = () => {
           <div className="text-sm opacity-75">Vencimento: {cardData.vencimento}</div>
         </div>
 
-        {/* Gráfico de Limite */}
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm">
-            <span>Limite Usado</span>
-            <span className="font-medium">{percentualUsado.toFixed(1)}%</span>
+        {/* Resumo do Limite */}
+        <div className="bg-muted/20 rounded-lg p-3">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-sm font-medium">Limite Usado</span>
+            <span className="text-lg font-bold text-primary">{percentualUsado.toFixed(1)}%</span>
           </div>
-          <Progress value={percentualUsado} className="h-3" />
-          <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
-            <div>Usado: R$ {cardData.usado.toLocaleString()}</div>
-            <div>Disponível: R$ {cardData.disponivel.toLocaleString()}</div>
+          <div className="grid grid-cols-2 gap-4 text-center">
+            <div>
+              <div className="text-sm font-bold text-destructive">R$ {cardData.usado.toLocaleString()}</div>
+              <div className="text-xs text-muted-foreground">Usado</div>
+            </div>
+            <div>
+              <div className="text-sm font-bold text-success">R$ {cardData.disponivel.toLocaleString()}</div>
+              <div className="text-xs text-muted-foreground">Disponível</div>
+            </div>
           </div>
         </div>
 

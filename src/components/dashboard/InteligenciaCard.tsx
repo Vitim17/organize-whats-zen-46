@@ -1,7 +1,6 @@
-import { PieChart, FileText, Filter, TrendingUp, TrendingDown } from "lucide-react";
+import { TrendingUp, TrendingDown, Lightbulb } from "lucide-react";
 import { DashboardCard } from "@/components/DashboardCard";
 import { Button } from "@/components/ui/button";
-import { PieChart as RechartsPieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { useState } from "react";
 
 export const InteligenciaCard = () => {
@@ -11,12 +10,6 @@ export const InteligenciaCard = () => {
   const entradas = 4300;
   const saidas = 1850;
 
-  const data = [
-    { name: 'Saldo Atual', value: saldoAtual, color: '#3B82F6' },
-    { name: 'Entradas', value: entradas, color: '#10B981' },
-    { name: 'Saídas', value: saidas, color: '#EF4444' }
-  ];
-
   const insights = [
     "💡 Seus gastos com alimentação aumentaram 8% este mês",
     "📈 Economia de R$ 180 comparado ao mês anterior",
@@ -25,64 +18,56 @@ export const InteligenciaCard = () => {
   ];
 
   return (
-    <DashboardCard title="Inteligência Financeira" icon={PieChart}>
+    <DashboardCard 
+      title="Inteligência Financeira" 
+      icon={Lightbulb}
+    >
       <div className="space-y-4">
-        {/* Gráfico Circular */}
-        <div className="h-48">
-          <ResponsiveContainer width="100%" height="100%">
-            <RechartsPieChart>
-              <Pie
-                data={data}
-                cx="50%"
-                cy="50%"
-                innerRadius={40}
-                outerRadius={80}
-                paddingAngle={5}
-                dataKey="value"
-              >
-                {data.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Pie>
-              <Tooltip 
-                formatter={(value: number) => [`R$ ${value.toLocaleString()}`, '']}
-                labelFormatter={(label) => label}
-              />
-            </RechartsPieChart>
-          </ResponsiveContainer>
-        </div>
-
         {/* Resumo dos Valores */}
-        <div className="grid grid-cols-3 gap-2 text-center">
-          <div className="bg-primary/10 rounded p-2">
-            <div className="text-sm font-bold text-primary">R$ {saldoAtual}</div>
+        <div className="grid grid-cols-3 gap-3 text-center">
+          <div className="bg-primary/10 rounded-lg p-3">
+            <div className="text-lg font-bold text-primary">R$ {saldoAtual}</div>
             <div className="text-xs text-muted-foreground">Saldo</div>
           </div>
-          <div className="bg-success/10 rounded p-2">
-            <div className="text-sm font-bold text-success">R$ {entradas}</div>
+          <div className="bg-success/10 rounded-lg p-3">
+            <div className="text-lg font-bold text-success">R$ {entradas}</div>
             <div className="text-xs text-muted-foreground">Entradas</div>
           </div>
-          <div className="bg-destructive/10 rounded p-2">
-            <div className="text-sm font-bold text-destructive">R$ {saidas}</div>
+          <div className="bg-destructive/10 rounded-lg p-3">
+            <div className="text-lg font-bold text-destructive">R$ {saidas}</div>
             <div className="text-xs text-muted-foreground">Saídas</div>
+          </div>
+        </div>
+
+        {/* Comparação com mês anterior */}
+        <div className="bg-muted/20 rounded-lg p-3">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-medium">Comparação com mês anterior</span>
+            <div className="flex items-center space-x-2">
+              <TrendingUp className="w-4 h-4 text-success" />
+              <span className="text-sm text-success">+R$ 180</span>
+            </div>
+          </div>
+          <div className="text-xs text-muted-foreground">
+            Você economizou R$ 180 comparado ao mês passado
           </div>
         </div>
 
         {/* Insights da Semana */}
         <div className="bg-primary/10 rounded-lg p-3">
           <div className="flex items-center justify-between mb-2">
-            <div className="text-sm font-medium text-primary">💡 Insights dos Gastos</div>
+            <span className="text-sm font-medium">Insights da Semana</span>
             <Button 
               size="sm" 
-              variant="ghost" 
+              variant="ghost"
               onClick={() => setShowInsights(!showInsights)}
-              className="h-6 px-2"
             >
-              {showInsights ? "Menos" : "Mais"}
+              {showInsights ? "Ocultar" : "Ver mais"}
             </Button>
           </div>
-          <div className="space-y-1">
-            {insights.slice(0, showInsights ? 4 : 1).map((insight, index) => (
+          
+          <div className="space-y-2">
+            {insights.slice(0, showInsights ? insights.length : 2).map((insight, index) => (
               <div key={index} className="text-xs text-muted-foreground">
                 {insight}
               </div>
@@ -90,30 +75,15 @@ export const InteligenciaCard = () => {
           </div>
         </div>
 
-        {/* Comparativo do Mês */}
-        <div className="grid grid-cols-2 gap-2">
-          <div className="bg-success/10 rounded p-2 text-center">
-            <TrendingUp className="h-4 w-4 text-success mx-auto mb-1" />
-            <div className="text-sm font-bold text-success">+15%</div>
-            <div className="text-xs text-muted-foreground">vs Mês Anterior</div>
+        {/* Meta de economia */}
+        <div className="bg-success/10 rounded-lg p-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-sm font-medium">Meta de Economia</div>
+              <div className="text-xs text-muted-foreground">75% concluída</div>
+            </div>
+            <div className="text-lg font-bold text-success">75%</div>
           </div>
-          <div className="bg-primary/10 rounded p-2 text-center">
-            <TrendingDown className="h-4 w-4 text-primary mx-auto mb-1" />
-            <div className="text-sm font-bold text-primary">-8%</div>
-            <div className="text-xs text-muted-foreground">Gastos Extras</div>
-          </div>
-        </div>
-
-        {/* Ações */}
-        <div className="flex space-x-2">
-          <Button size="sm" variant="outline" className="flex-1">
-            <FileText className="h-3 w-3 mr-1" />
-            Relatório
-          </Button>
-          <Button size="sm" variant="outline" className="flex-1">
-            <Filter className="h-3 w-3 mr-1" />
-            Filtros
-          </Button>
         </div>
       </div>
     </DashboardCard>
