@@ -17,10 +17,10 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 15%;
 
-    --primary: 214 84% 56%;          /* Modern Blue #3B82F6 */
+    --primary: 142 76% 36%;          /* WhatsApp Green #22C55E */
     --primary-foreground: 0 0% 100%;
-    --primary-light: 214 84% 85%;
-    --primary-glow: 214 84% 70%;
+    --primary-light: 142 76% 85%;
+    --primary-glow: 142 76% 70%;
 
     --secondary: 210 40% 98%;
     --secondary-foreground: 215 16% 47%;
@@ -40,7 +40,7 @@ All colors MUST be HSL.
 
     --border: 240 6% 90%;
     --input: 240 6% 90%;
-    --ring: 214 84% 56%;
+    --ring: 142 76% 36%;
 
     --radius: 0.75rem;
 
@@ -60,57 +60,81 @@ All colors MUST be HSL.
 
     --sidebar-background: 250 50% 98%;
     --sidebar-foreground: 240 10% 15%;
-    --sidebar-primary: 214 84% 56%;
+    --sidebar-primary: 142 76% 36%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 210 40% 98%;
     --sidebar-accent-foreground: 215 16% 47%;
     --sidebar-border: 240 6% 90%;
     --sidebar-ring: 214 84% 56%;
+
+    /* Chart colors */
+    --chart-1: 142 76% 36%;  /* Green for gains */
+    --chart-2: 0 84% 60%;    /* Red for expenses */
+    --chart-3: 142 76% 36%;  /* Green for equity */
+    --chart-4: 320 100% 36%; /* Purple for other */
+    --chart-5: 45 93% 47%;  /* Yellow for other */
   }
 
   .dark {
-    --background: 240 10% 4%;
-    --foreground: 240 5% 95%;
+    /* Base colors - Seguindo exatamente a segunda imagem (Settings) */
+    --background: 0 0% 0%;           /* #000000 - Preto sólido */
+    --foreground: 0 0% 100%;         /* #ffffff - Branco puro */
 
-    --card: 240 10% 6%;
-    --card-foreground: 240 5% 95%;
+    /* Card colors - Cinza escuro como na página de Settings */
+    --card: 0 0% 6%;                 /* #0f0f0f - Cinza muito escuro */
+    --card-foreground: 0 0% 100%;    /* #ffffff - Branco puro */
 
-    --popover: 240 10% 6%;
-    --popover-foreground: 240 5% 95%;
+    --popover: 0 0% 6%;              /* #0f0f0f - Cinza muito escuro */
+    --popover-foreground: 0 0% 100%; /* #ffffff - Branco puro */
 
-    --primary: 214 84% 70%;
-    --primary-foreground: 240 10% 4%;
-    --primary-light: 214 84% 15%;
-    --primary-glow: 214 84% 80%;
+    /* Primary colors - Verde WhatsApp */
+    --primary: 142 76% 60%;          /* #22c55e - Verde vibrante */
+    --primary-foreground: 0 0% 0%;   /* #000000 - Preto para contraste */
+    --primary-light: 142 76% 25%;    /* #15803d - Verde escuro */
+    --primary-glow: 142 76% 90%;     /* #bbf7d0 - Verde claro */
 
-    --secondary: 240 4% 16%;
-    --secondary-foreground: 240 5% 95%;
+    /* Secondary colors - Cinza escuro */
+    --secondary: 0 0% 10%;           /* #1a1a1a - Cinza escuro */
+    --secondary-foreground: 0 0% 100%; /* #ffffff - Branco puro */
 
-    --success: 142 76% 50%;
-    --success-foreground: 240 10% 4%;
-    --success-light: 142 76% 15%;
+    /* Success colors - Verde vibrante */
+    --success: 142 76% 60%;          /* #22c55e - Verde vibrante */
+    --success-foreground: 0 0% 0%;   /* #000000 - Preto para contraste */
+    --success-light: 142 76% 25%;    /* #15803d - Verde escuro */
 
-    --muted: 240 4% 16%;
-    --muted-foreground: 240 4% 65%;
+    /* Muted colors - Cinza escuro */
+    --muted: 0 0% 10%;               /* #1a1a1a - Cinza escuro */
+    --muted-foreground: 0 0% 80%;   /* #cccccc - Cinza claro */
 
-    --accent: 240 4% 16%;
-    --accent-foreground: 240 5% 95%;
+    /* Accent colors - Azul vibrante */
+    --accent: 217 91% 60%;           /* #3b82f6 - Azul vibrante */
+    --accent-foreground: 0 0% 100%;  /* #ffffff - Branco puro */
 
-    --destructive: 0 63% 50%;
-    --destructive-foreground: 240 5% 95%;
+    /* Destructive colors - Vermelho vibrante */
+    --destructive: 0 84% 60%;        /* #ef4444 - Vermelho vibrante */
+    --destructive-foreground: 0 0% 100%; /* #ffffff - Branco puro */
 
-    --border: 240 4% 16%;
-    --input: 240 4% 16%;
-    --ring: 214 84% 70%;
+    /* Border and input colors */
+    --border: 0 0% 15%;              /* #262626 - Cinza escuro */
+    --input: 0 0% 10%;               /* #1a1a1a - Cinza escuro */
+    --ring: 142 76% 60%;             /* #22c55e - Verde vibrante */
 
-    --sidebar-background: 240 10% 4%;
-    --sidebar-foreground: 240 5% 95%;
-    --sidebar-primary: 214 84% 70%;
-    --sidebar-primary-foreground: 240 10% 4%;
-    --sidebar-accent: 240 4% 16%;
-    --sidebar-accent-foreground: 240 5% 95%;
-    --sidebar-border: 240 4% 16%;
-    --sidebar-ring: 214 84% 70%;
+    /* Sidebar colors */
+    --sidebar-background: 0 0% 6%;   /* #0f0f0f - Cinza muito escuro */
+    --sidebar-foreground: 0 0% 100%; /* #ffffff - Branco puro */
+    --sidebar-primary: 142 76% 60%;  /* #22c55e - Verde vibrante */
+    --sidebar-primary-foreground: 0 0% 0%; /* #000000 - Preto */
+    --sidebar-accent: 0 0% 10%;      /* #1a1a1a - Cinza escuro */
+    --sidebar-accent-foreground: 0 0% 100%; /* #ffffff - Branco */
+    --sidebar-border: 0 0% 15%;      /* #262626 - Cinza escuro */
+    --sidebar-ring: 142 76% 60%;     /* #22c55e - Verde vibrante */
+
+    /* Chart colors - Mais vibrantes para melhor contraste */
+    --chart-1: 142 76% 65%;          /* #16a34a - Verde vibrante para ganhos */
+    --chart-2: 0 84% 65%;            /* #dc2626 - Vermelho vibrante para despesas */
+    --chart-3: 142 76% 65%;          /* #16a34a - Verde vibrante para patrimônio */
+    --chart-4: 217 91% 65%;          /* #2563eb - Azul vibrante para outros */
+    --chart-5: 45 93% 75%;           /* #eab308 - Amarelo vibrante para outros */
   }
 }
 
@@ -155,5 +179,82 @@ All colors MUST be HSL.
   /* Text gradients */
   .text-gradient-primary {
     @apply bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent;
+  }
+
+  /* Dark mode improvements - Seguindo a paleta da segunda imagem (Settings) */
+  .dark .card-hover {
+    @apply hover:bg-card/80 hover:shadow-2xl hover:border-slate-600;
+  }
+
+  .dark .text-muted-foreground {
+    @apply text-slate-300;
+  }
+
+  .dark .border {
+    @apply border-slate-700;
+  }
+
+  .dark .bg-card {
+    @apply bg-slate-800/95 backdrop-blur-sm;
+  }
+
+  .dark .text-card-foreground {
+    @apply text-white;
+  }
+
+  /* Enhanced visibility for numbers and values */
+  .dark .text-2xl,
+  .dark .text-3xl,
+  .dark .text-4xl,
+  .dark .text-5xl {
+    @apply text-white font-semibold;
+  }
+
+  /* Better contrast for small text */
+  .dark .text-sm {
+    @apply text-slate-200;
+  }
+
+  /* Enhanced button visibility - Azul vibrante como na segunda imagem */
+  .dark .primary-button {
+    @apply bg-blue-500 hover:bg-blue-400 text-white;
+  }
+
+  .dark .text-primary {
+    @apply text-green-400;
+  }
+
+  .dark .text-destructive {
+    @apply text-red-400;
+  }
+
+  .dark .text-green-600 {
+    @apply text-green-400;
+  }
+
+  .dark .text-red-600 {
+    @apply text-red-400;
+  }
+
+  /* Cores específicas para o modo escuro */
+  .dark .btn-primary {
+    @apply bg-blue-500 hover:bg-blue-400 text-white;
+  }
+
+  .dark .text-accent {
+    @apply text-blue-400;
+  }
+
+  /* Melhor contraste para elementos de destaque */
+  .dark .card-background {
+    @apply bg-slate-800;
+  }
+
+  .dark .surface-elevated {
+    @apply bg-slate-700;
+  }
+
+  .dark .surface-hover {
+    @apply bg-slate-600;
   }
 }

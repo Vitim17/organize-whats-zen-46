@@ -1,83 +1,73 @@
-import { Tags, Plus, Edit2, Trash2 } from "lucide-react";
+import { Tags } from "lucide-react";
 import { DashboardCard } from "@/components/DashboardCard";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
 
 export const CategoriasCard = () => {
-  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
-  const [showAddForm, setShowAddForm] = useState(false);
-
   const categories = [
     { 
+      id: 1,
       name: "Trabalho", 
       count: 23, 
-      color: "bg-primary", 
+      color: "bg-green-500",
       gastoAtual: 850.50, 
-      limite: 1200,
+      limite: 1200.00,
       gastos: [
-        { item: "Material escritório", valor: 120.30 },
-        { item: "Software", valor: 299.90 },
-        { item: "Transporte", valor: 430.30 }
+        { item: "Material de escritório", valor: 150.00 },
+        { item: "Software", valor: 300.00 },
+        { item: "Cursos", valor: 400.50 }
       ]
     },
     { 
+      id: 2,
       name: "Pessoal", 
       count: 15, 
-      color: "bg-success", 
+      color: "bg-green-500",
       gastoAtual: 1245.80, 
-      limite: 1500,
+      limite: 1500.00,
       gastos: [
-        { item: "Roupas", valor: 345.50 },
-        { item: "Cuidados pessoais", valor: 180.30 },
-        { item: "Diversos", valor: 720.00 }
+        { item: "Alimentação", valor: 800.00 },
+        { item: "Transporte", valor: 200.00 },
+        { item: "Lazer", valor: 245.80 }
       ]
     },
     { 
+      id: 3,
       name: "Financeiro", 
       count: 8, 
-      color: "bg-destructive", 
+      color: "bg-red-500",
       gastoAtual: 350.00, 
-      limite: 500,
+      limite: 500.00,
       gastos: [
-        { item: "Tarifas bancárias", valor: 45.00 },
-        { item: "Investimentos", valor: 305.00 }
+        { item: "Investimentos", valor: 200.00 },
+        { item: "Seguros", valor: 150.00 }
       ]
     },
     { 
+      id: 4,
       name: "Saúde", 
       count: 5, 
-      color: "bg-blue-500", 
+      color: "bg-green-500", 
       gastoAtual: 480.90, 
-      limite: 800,
+      limite: 900.00,
       gastos: [
-        { item: "Consultas", valor: 280.00 },
-        { item: "Medicamentos", valor: 200.90 }
+        { item: "Consultas", valor: 300.00 },
+        { item: "Medicamentos", valor: 180.90 }
       ]
     },
     { 
+      id: 5,
       name: "Lazer", 
-      count: 12, 
+      count: 10,
       color: "bg-purple-500", 
       gastoAtual: 920.30, 
-      limite: 1000,
+      limite: 1000.00,
       gastos: [
-        { item: "Cinema", valor: 120.00 },
-        { item: "Restaurantes", valor: 650.30 },
-        { item: "Jogos", valor: 150.00 }
+        { item: "Viagens", valor: 500.00 },
+        { item: "Restaurantes", valor: 250.00 },
+        { item: "Hobbies", valor: 170.30 }
       ]
-    },
+    }
   ];
-
-  const handleEditCategory = (index: number) => {
-    // Lógica para editar categoria
-    console.log("Editar categoria:", index);
-  };
-
-  const handleDeleteCategory = (index: number) => {
-    // Lógica para deletar categoria
-    console.log("Deletar categoria:", index);
-  };
 
   const totalGasto = categories.reduce((sum, cat) => sum + cat.gastoAtual, 0);
   const totalItens = categories.reduce((sum, cat) => sum + cat.count, 0);
@@ -86,122 +76,52 @@ export const CategoriasCard = () => {
     <DashboardCard
       title="Categorias & Orçamentos"
       icon={Tags}
-      className="col-span-1 lg:col-span-2"
+      className="col-span-1"
     >
       <div className="space-y-4">
-        {/* Header com botão de adicionar */}
-        <div className="flex items-center justify-between">
-          <div className="text-sm text-muted-foreground">
-            {categories.length} categorias ativas
-          </div>
-          <Button 
-            size="sm" 
-            onClick={() => setShowAddForm(!showAddForm)}
-            className="flex items-center space-x-2"
-          >
-            <Plus className="w-4 h-4" />
-            Nova
-          </Button>
-        </div>
-
-        {/* Lista de categorias simplificada */}
+        {/* Lista de Categorias */}
         <div className="space-y-3">
-          {categories.map((category, index) => {
-            const percentualGasto = (category.gastoAtual / category.limite) * 100;
-            const isExpanded = selectedCategory === index;
-            
-            return (
-              <div key={index} className="border rounded-lg p-3 bg-muted/20">
-                <div 
-                  className="flex items-center justify-between cursor-pointer"
-                  onClick={() => setSelectedCategory(isExpanded ? null : index)}
-                >
-                  <div className="flex items-center space-x-3">
-                    <div className={`w-3 h-3 rounded-full ${category.color}`}></div>
-                    <div>
-                      <div className="text-sm font-medium">{category.name}</div>
-                      <div className="text-xs text-muted-foreground">
-                        {category.count} itens
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-2">
-                    <div className="text-right">
-                      <div className="text-sm font-medium">
-                        R$ {category.gastoAtual.toFixed(2)}
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        de R$ {category.limite.toFixed(2)}
-                      </div>
-                    </div>
-                    
-                    <div className="flex space-x-1">
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleEditCategory(index);
-                        }}
-                        className="h-6 w-6 p-0"
-                      >
-                        <Edit2 className="w-3 h-3" />
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteCategory(index);
-                        }}
-                        className="h-6 w-6 p-0 text-destructive"
-                      >
-                        <Trash2 className="w-3 h-3" />
-                      </Button>
-                    </div>
-                  </div>
+          {categories.map((category) => (
+            <div
+              key={category.id}
+              className="flex items-center justify-between p-3 bg-white dark:bg-[#3c3c3c] rounded-lg border border-gray-200 dark:border-slate-600"
+            >
+              <div className="flex items-center space-x-3">
+                <div className={`w-3 h-3 rounded-full ${category.color}`} />
+                <div>
+                  <h4 className="font-medium text-gray-900 dark:text-slate-200">{category.name}</h4>
+                  <p className="text-sm text-gray-500 dark:text-slate-400">{category.count} itens</p>
                 </div>
-
-                {/* Detalhes expandidos */}
-                {isExpanded && (
-                  <div className="mt-3 pt-3 border-t">
-                    <div className="space-y-2">
-                      {category.gastos.map((gasto, gastoIndex) => (
-                        <div key={gastoIndex} className="flex justify-between text-sm">
-                          <span className="text-muted-foreground">{gasto.item}</span>
-                          <span className="font-medium">R$ {gasto.valor.toFixed(2)}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
-            );
-          })}
+              
+              <div className="text-right">
+                <div className="font-medium text-gray-900 dark:text-slate-200">
+                  R$ {category.gastoAtual.toFixed(2)}
+                </div>
+                <div className="text-sm text-gray-500 dark:text-slate-400">
+                  de R$ {category.limite.toFixed(2)}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* Resumo simplificado */}
-        <div className="pt-4 border-t">
-          <div className="grid grid-cols-3 gap-4 text-center">
-            <div>
-              <div className="text-lg font-bold">R$ {totalGasto.toFixed(0)}</div>
-              <div className="text-xs text-muted-foreground">Total Gasto</div>
+        {/* Resumo */}
+        <div className="pt-4 border-t border-gray-200 dark:border-slate-600">
+          <div className="flex justify-between items-center">
+            <div className="text-sm text-gray-600 dark:text-slate-300">
+              Total Gasto: <span className="font-medium text-gray-900 dark:text-slate-200">R$ {totalGasto.toFixed(0)}</span>
             </div>
-            <div>
-              <div className="text-lg font-bold">{categories.length}</div>
-              <div className="text-xs text-muted-foreground">Categorias</div>
-            </div>
-            <div>
-              <div className="text-lg font-bold">{totalItens}</div>
-              <div className="text-xs text-muted-foreground">Itens Total</div>
+            <div className="flex space-x-4 text-sm text-gray-600 dark:text-slate-300">
+              <span>Categorias: <span className="font-medium text-gray-900 dark:text-slate-200">{categories.length}</span></span>
+              <span>Itens Total: <span className="font-medium text-gray-900 dark:text-slate-200">{totalItens}</span></span>
             </div>
           </div>
         </div>
 
         {/* Dica */}
-        <div className="text-xs text-muted-foreground text-center">
-          💡 Clique em uma categoria para ver os detalhes dos gastos
+        <div className="text-xs text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-[#3c3c3c] p-2 rounded-lg dark:border dark:border-yellow-500/30">
+          💡 Edite suas categorias diretamente pelo WhatsApp
         </div>
       </div>
     </DashboardCard>
